@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-struct Point {
+struct Point: CustomStringConvertible {
     var row: Int
     var column: Int
     
@@ -17,6 +17,10 @@ struct Point {
         let x = (row - point.row) * (row - point.row)
         let y = (column - point.column) * (column - point.column)
         return x + y
+    }
+    
+    var description: String {
+        return "row: \(row), column: \(column)"
     }
 }
 
@@ -30,14 +34,28 @@ struct Node {
     }
 }
 
+extension Node: CustomStringConvertible {
+    var description: String {
+        return "index: \(index),point: \(point)"
+    }
+}
+
+protocol GameProtocol: NSObjectProtocol {
+    func GameWin() -> Void
+}
+
 
 class GameScene: SKScene {
+    weak var gameDelegate: GameProtocol?
+    
     var nodes: [Node] = []
     var emptyNode: Node? {
         return nodes.filter({
             $0.index == Config.shared.row * Config.shared.column - 1
         }).first
     }
+    
+    var playing = false
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -48,8 +66,18 @@ class GameScene: SKScene {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    func successCheck() -> Bool{
+        for (index, value) in nodes.enumerated() {
+            if index != value.index {
+                return false
+            }
+        }
+        return true
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard playing else {
+            return
+        }
         guard let touch = touches.first else {
             return
         }
@@ -70,14 +98,17 @@ class GameScene: SKScene {
         }
         changeNodePosition(one: t.node, to: empty.node)
         
-        let newA = Node.init(point: empty.point, node: t.node, index: t.index)
-        let newB = Node.init(point: t.point, node: empty.node, index: empty.index)
+        let indexT = t.point.row * Config.shared.column + t.point.column
+        let indexE = empty.point.row * Config.shared.column + empty.point.column
         
-        nodes[t.point.row * Config.shared.column + t.point.column] = newB
-        nodes[empty.point.row * Config.shared.column + empty.point.column] = newA
+        exchangeNode(at: indexT, to: indexE)
+        if successCheck() {
+            gameDelegate?.GameWin()
+        }
         
     }
     
+    //MARK: - 改变位置
     private func changeNodePosition(one: SKNode, to another: SKNode) {
         let moveActiona = SKAction.move(to: another.position, duration: 0.2)
         let moveActionb = SKAction.move(to: one.position, duration: 0.2)
@@ -89,18 +120,28 @@ class GameScene: SKScene {
         }
     }
     
+    func exchangeNode(at one: Int, to another: Int) {
+        var nodeOne = nodes[one]
+        var nodeAno = nodes[another]
+        let pointOne = nodeOne.point
+        let pointAno = nodeAno.point
+        nodeOne.point = pointAno
+        nodeAno.point = pointOne
+        nodes[one] = nodeAno
+        nodes[another] = nodeOne
+    }
+    //MARK: - clear
     func clear() {
         removeAllChildren()
         nodes.removeAll()
     }
-    
+    //MARK: - 加载数据
     func reload(data: [[UIImage]]) {
         clear()
-        
         let margin = Config.shared.margin
         let row = Config.shared.row
         let column = Config.shared.column
-        
+
         let width = (size.width - margin * CGFloat(column + 2) ) / CGFloat(column)
         let height = (size.height - margin * CGFloat(row + 2)) / CGFloat(row)
         
@@ -122,8 +163,22 @@ class GameScene: SKScene {
                 nodes.append(value)
             }
         }
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+            self.beginGame()
+        }
     }
     
+    func beginGame() {
+        let count = nodes.count
+        let random1 = Int(arc4random_uniform(UInt32(count)))
+        let random2 = Int(arc4random_uniform(UInt32(count)))
+        exchangeNode(at: random1, to: random2)
+        changeNodePosition(one: nodes[random1].node, to: nodes[random2].node)
+        playing = true
+    }
+    
+    //MARK: - 坐标转换
     func convertPoint(toLocal point: CGPoint) -> CGPoint {
         return CGPoint.init(x: point.x, y: size.height -  point.y)
     }

@@ -21,6 +21,7 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         if let skView = self.view as! SKView? {
             game = GameScene.init(size: view.bounds.size)
+            game.gameDelegate = self
             skView.presentScene(game)
             skView.ignoresSiblingOrder = true
             
@@ -53,6 +54,15 @@ class GameViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+}
+
+extension GameViewController: GameProtocol {
+    func GameWin() {
+        let alertVc = UIAlertController.init(title: "Congratulation", message: "YOU WIN", preferredStyle: .alert)
+        let OKAction = UIAlertAction.init(title: "OK", style: .default, handler: nil)
+        alertVc.addAction(OKAction)
+        present(alertVc, animated: true, completion: nil)
+    }
 }
 
 extension GameViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
