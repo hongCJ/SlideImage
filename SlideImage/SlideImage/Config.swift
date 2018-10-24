@@ -14,6 +14,9 @@ class Config: NSObject {
     var row = 3
     var column = 3
     
-    var margin: CGFloat = 5.0
+    var margin: CGFloat = 2.0
     
+    var image: UIImage? 
+    
+    var refresh = true
 }

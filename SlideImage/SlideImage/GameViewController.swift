@@ -13,10 +13,8 @@ import UIKit
 class GameViewController: UIViewController {
 
     var image: UIImage?
-    var imagePicker: UIImagePickerController!
-    
     var game: GameScene!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         if let skView = self.view as! SKView? {
@@ -27,28 +25,24 @@ class GameViewController: UIViewController {
             
             skView.showsFPS = true
             skView.showsNodeCount = true
-        }
+        } 
         
-        imagePicker = UIImagePickerController.init()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-
     }
     
-    @IBAction func choosePic(_ sender: Any) {
-        navigationController?.present(imagePicker, animated: true, completion: nil)
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        game.size = CGSize.init(width: view.bounds.width, height: view.bounds.height - 64)
     }
     
-   
-    
-    func pickerDone() {
-        guard let img = image else {
-            return
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let img = Config.shared.image, Config.shared.refresh == true {
+            let images = img.cropTo(row: Config.shared.row, column: Config.shared.column)
+            game.reload(data: images.reversed())
+            Config.shared.refresh = false
         }
-        let images = img.cropTo(row: Config.shared.row, column: Config.shared.column)
-        game.reload(data: images.reversed())
     }
-    
+ 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -59,20 +53,12 @@ class GameViewController: UIViewController {
 extension GameViewController: GameProtocol {
     func GameWin() {
         let alertVc = UIAlertController.init(title: "Congratulation", message: "YOU WIN", preferredStyle: .alert)
-        let OKAction = UIAlertAction.init(title: "OK", style: .default, handler: nil)
+        let OKAction = UIAlertAction.init(title: "OK", style: .default) { (_) in
+//            self.dismiss(animated: true, completion: nil)
+        }
         alertVc.addAction(OKAction)
         present(alertVc, animated: true, completion: nil)
     }
 }
 
-extension GameViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        picker.dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        image = info[UIImagePickerControllerOriginalImage] as? UIImage
-        pickerDone()
-        picker.dismiss(animated: true, completion: nil)
-    }
-}
+

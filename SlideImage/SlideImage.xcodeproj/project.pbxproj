@@ -18,6 +18,7 @@
 		EC61B055217EC0A500E3DDD6 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC61B054217EC0A500E3DDD6 /* GameScene.swift */; };
 		EC61B058217EC0B300E3DDD6 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC61B057217EC0B300E3DDD6 /* SpriteKit.framework */; };
 		EC61B05C217ECE3B00E3DDD6 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC61B05B217ECE3B00E3DDD6 /* Config.swift */; };
+		ECA1F205218054CD00631D92 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA1F204218054CD00631D92 /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		EC61B054217EC0A500E3DDD6 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		EC61B057217EC0B300E3DDD6 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		EC61B05B217ECE3B00E3DDD6 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		ECA1F204218054CD00631D92 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				EC3483A6217E063900CDB0E7 /* LaunchScreen.storyboard */,
 				EC3483A9217E063900CDB0E7 /* Info.plist */,
 				EC3483CB217E066500CDB0E7 /* GameViewController.swift */,
+				ECA1F204218054CD00631D92 /* SettingViewController.swift */,
 				EC61B052217EBFD900E3DDD6 /* ImageHelper.swift */,
 				EC61B054217EC0A500E3DDD6 /* GameScene.swift */,
 				EC61B05B217ECE3B00E3DDD6 /* Config.swift */,
@@ -282,6 +285,7 @@
 				EC61B05C217ECE3B00E3DDD6 /* Config.swift in Sources */,
 				EC61B055217EC0A500E3DDD6 /* GameScene.swift in Sources */,
 				EC61B053217EBFD900E3DDD6 /* ImageHelper.swift in Sources */,
+				ECA1F205218054CD00631D92 /* SettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,7 +467,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zhenghong.SlideImage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -480,7 +484,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zhenghong.SlideImage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

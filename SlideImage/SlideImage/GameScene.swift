@@ -42,6 +42,7 @@ extension Node: CustomStringConvertible {
 
 protocol GameProtocol: NSObjectProtocol {
     func GameWin() -> Void
+    
 }
 
 

@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="HIh-F1-CIb" kind="relationship" relationship="rootViewController" id="Pdu-PY-4Hu"/>
+                        <segue destination="m4A-Sn-6oE" kind="relationship" relationship="rootViewController" id="gAc-36-roY"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FbY-T0-fLg" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -27,26 +27,94 @@
             <point key="canvasLocation" x="-935" y="-43"/>
         </scene>
         <!--Game View Controller-->
-        <scene sceneID="NfC-KC-XwA">
+        <scene sceneID="UEa-AU-GgA">
             <objects>
-                <viewController id="HIh-F1-CIb" customClass="GameViewController" customModule="SlideImage" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1uD-2A-451" customClass="SKView">
+                <viewController id="m4A-Sn-6oE" customClass="GameViewController" customModule="SlideImage" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3jb-VZ-ZWq" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="6aV-u0-7Tc"/>
+                        <viewLayoutGuide key="safeArea" id="rxM-ww-fBa"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Xuz-1H-67d">
-                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="add" id="A4B-Zc-qdq">
+                    <navigationItem key="navigationItem" id="OKl-xY-u9J">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="rFC-t4-4Pc">
                             <connections>
-                                <action selector="choosePic:" destination="HIh-F1-CIb" id="Mub-QW-Kmp"/>
+                                <segue destination="NZ1-v1-HyR" kind="show" id="TdS-ks-ccQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="G4m-6Q-3K7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DT7-r5-VKz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-119" y="-44"/>
+            <point key="canvasLocation" x="-110" y="-44"/>
+        </scene>
+        <!--Setting View Controller-->
+        <scene sceneID="YbJ-fY-F8f">
+            <objects>
+                <viewController id="NZ1-v1-HyR" customClass="SettingViewController" customModule="SlideImage" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6o7-iV-Z2k">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minimumValue="3" maximumValue="9" translatesAutoresizingMaskIntoConstraints="NO" id="8Ep-LK-HW7">
+                                <rect key="frame" x="251" y="109" width="94" height="29"/>
+                                <connections>
+                                    <action selector="rowChanged:" destination="NZ1-v1-HyR" eventType="valueChanged" id="RJ2-l1-Lsb"/>
+                                </connections>
+                            </stepper>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Row: 3.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COJ-z3-Nfo">
+                                <rect key="frame" x="30" y="111" width="201" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Column: 3.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qtV-cA-NuN">
+                                <rect key="frame" x="30" y="188" width="211" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minimumValue="3" maximumValue="9" translatesAutoresizingMaskIntoConstraints="NO" id="lRN-Ml-Yjg">
+                                <rect key="frame" x="251" y="180" width="94" height="29"/>
+                                <connections>
+                                    <action selector="columnChanged:" destination="NZ1-v1-HyR" eventType="valueChanged" id="nc1-KA-ytt"/>
+                                </connections>
+                            </stepper>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wp5-hv-TH5">
+                                <rect key="frame" x="143" y="308" width="89" height="35"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="choosePic"/>
+                                <connections>
+                                    <action selector="choosePic:" destination="NZ1-v1-HyR" eventType="touchUpInside" id="2M3-fQ-tVI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="COJ-z3-Nfo" firstAttribute="top" secondItem="EYL-DO-lJR" secondAttribute="top" constant="47" id="103-M8-awM"/>
+                            <constraint firstItem="wp5-hv-TH5" firstAttribute="centerX" secondItem="6o7-iV-Z2k" secondAttribute="centerX" id="8E9-2M-Okk"/>
+                            <constraint firstItem="8Ep-LK-HW7" firstAttribute="top" secondItem="EYL-DO-lJR" secondAttribute="top" constant="45" id="8PL-Ro-w1X"/>
+                            <constraint firstItem="qtV-cA-NuN" firstAttribute="leading" secondItem="EYL-DO-lJR" secondAttribute="leading" constant="30" id="KlL-hk-aOD"/>
+                            <constraint firstItem="qtV-cA-NuN" firstAttribute="top" secondItem="COJ-z3-Nfo" secondAttribute="bottom" constant="56.5" id="LjG-WT-B2n"/>
+                            <constraint firstItem="EYL-DO-lJR" firstAttribute="trailing" secondItem="8Ep-LK-HW7" secondAttribute="trailing" constant="30" id="YJU-El-gwm"/>
+                            <constraint firstItem="lRN-Ml-Yjg" firstAttribute="leading" secondItem="qtV-cA-NuN" secondAttribute="trailing" constant="10" id="dFh-ft-LSa"/>
+                            <constraint firstItem="wp5-hv-TH5" firstAttribute="top" secondItem="qtV-cA-NuN" secondAttribute="bottom" constant="99" id="nmu-BR-a1B"/>
+                            <constraint firstItem="EYL-DO-lJR" firstAttribute="trailing" secondItem="lRN-Ml-Yjg" secondAttribute="trailing" constant="30" id="orA-mO-xOs"/>
+                            <constraint firstItem="COJ-z3-Nfo" firstAttribute="leading" secondItem="EYL-DO-lJR" secondAttribute="leading" constant="30" id="qAV-Wy-lLL"/>
+                            <constraint firstItem="8Ep-LK-HW7" firstAttribute="leading" secondItem="COJ-z3-Nfo" secondAttribute="trailing" constant="20" id="tEE-WL-HQE"/>
+                            <constraint firstItem="lRN-Ml-Yjg" firstAttribute="top" secondItem="8Ep-LK-HW7" secondAttribute="bottom" constant="42" id="vfQ-PN-NqO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="EYL-DO-lJR"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="x5J-F0-Iaq"/>
+                    <connections>
+                        <outlet property="columnLabel" destination="qtV-cA-NuN" id="xUD-nU-RKZ"/>
+                        <outlet property="rowLabel" destination="COJ-z3-Nfo" id="ErT-bF-cpM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2NH-G6-5WH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="652" y="-44"/>
         </scene>
     </scenes>
 </document>
